@@ -23,9 +23,9 @@ elif plot_choice == "BMI vs Age":
 
     def assign_color(row):
         if row["HighBP"] == 0 and row["HighChol"] == 0:
-            return "blue"   
+            return "lightblue"   
         elif row["HighBP"] == 1 and row["HighChol"] == 0:
-            return "purple"        
+            return "yellow"        
         elif row["HighBP"] == 0 and row["HighChol"] == 1:
             return "pink"      
         else:
