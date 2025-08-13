@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-import json
-from datetime import datetime
-import altair as alt
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
