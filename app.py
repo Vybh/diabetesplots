@@ -23,18 +23,18 @@ elif plot_choice == "BMI vs Age":
 
     def assign_color(row):
         if row["HighBP"] == 0 and row["HighChol"] == 0:
-            return "lightblue"   
+            return "blue"   
         elif row["HighBP"] == 1 and row["HighChol"] == 0:
-            return "pink"        
+            return "purple"        
         elif row["HighBP"] == 0 and row["HighChol"] == 1:
-            return "orange"      
+            return "pink"      
         else:
             return "red"
 
     df["color"] = df.apply(assign_color, axis=1)
 
     fig, ax = plt.subplots()
-    ax.scatter(df["BMI"], df["Age"], c=df["color"], alpha=0.6)
+    ax.scatter(df["BMI"], df["Age"], c=df["color"], alpha=0.3)
     ax.set_xlabel("BMI")
     ax.set_ylabel("Age")
     ax.set_title("BMI vs Age (Colored by BP & Cholesterol Status)")
