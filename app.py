@@ -21,16 +21,15 @@ if plot_choice == "CorrPlot":
 elif plot_choice == "BMI vs Age":
     st.header("BMI vs Age Scatter Plot")
 
-    # Map conditions to colors
     def assign_color(row):
         if row["HighBP"] == 0 and row["HighChol"] == 0:
-            return "lightblue"   # Neither
+            return "lightblue"   
         elif row["HighBP"] == 1 and row["HighChol"] == 0:
-            return "pink"        # Only High BP
+            return "pink"        
         elif row["HighBP"] == 0 and row["HighChol"] == 1:
-            return "orange"      # Only High Cholesterol
+            return "orange"      
         else:
-            return "red"         # Both
+            return "red"
 
     df["color"] = df.apply(assign_color, axis=1)
 
@@ -39,15 +38,5 @@ elif plot_choice == "BMI vs Age":
     ax.set_xlabel("BMI")
     ax.set_ylabel("Age")
     ax.set_title("BMI vs Age (Colored by BP & Cholesterol Status)")
-
-    # Add a custom legend
-    from matplotlib.lines import Line2D
-    legend_elements = [
-        Line2D([0], [0], marker='o', color='w', label='Neither', markerfacecolor='lightblue', markersize=8),
-        Line2D([0], [0], marker='o', color='w', label='Only High BP', markerfacecolor='pink', markersize=8),
-        Line2D([0], [0], marker='o', color='w', label='Only High Cholesterol', markerfacecolor='orange', markersize=8),
-        Line2D([0], [0], marker='o', color='w', label='Both', markerfacecolor='red', markersize=8)
-    ]
-    ax.legend(handles=legend_elements, title="Condition")
-
+    
     st.pyplot(fig)
