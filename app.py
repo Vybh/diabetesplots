@@ -5,7 +5,7 @@ from datetime import datetime
 import altair as alt
 import numpy as np
 
-data = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
+df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
