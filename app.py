@@ -34,7 +34,7 @@ elif plot_choice == "BMI vs Age":
     df["color"] = df.apply(assign_color, axis=1)
 
     fig, ax = plt.subplots()
-    ax.scatter(df["BMI"], df["Age"], c=df["color"], alpha=0.3)
+    ax.scatter(df["BMI"], df["Age"], c=df["color"], alpha=0.45)
     ax.set_xlabel("BMI")
     ax.set_ylabel("Age")
     ax.set_title("BMI vs Age (Colored by BP & Cholesterol Status)")
