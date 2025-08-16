@@ -3,12 +3,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import altair as alt
 
 df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
-plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age"])
+plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "Risk Factors"])
 
 if plot_choice == "CorrPlot":
     st.header("Correlation Heatmap of Health Factors")
@@ -38,5 +39,25 @@ elif plot_choice == "BMI vs Age":
     ax.set_xlabel("BMI")
     ax.set_ylabel("Age")
     ax.set_title("BMI vs Age (Colored by BP & Cholesterol Status)")
-    
     st.pyplot(fig)
+
+elif plot_choice == "Risk Factors":
+    st.header("Smoker vs HighBP vs HighChol in Diabetics vs Non-Diabetics")
+    df["DiabetesStatus"] = df["Diabetes_012"].apply(lambda x: "Diabetic" if x > 0 else "Non-Diabetic")
+    risk_factors = ["Smoker", "HighBP", "HighChol"]
+    df_melted = df.melt(id_vars="DiabetesStatus", value_vars=risk_factors,
+                        var_name="RiskFactor", value_name="Value")
+    df_melted = df_melted[df_melted["Value"] == 1]
+    proportions = df_melted.groupby(["DiabetesStatus", "RiskFactor"]).size().reset_index(name="Count")
+    proportions["Proportion"] = proportions.groupby("DiabetesStatus")["Count"].apply(lambda x: x / x.sum())
+    chart = alt.Chart(proportions).mark_bar().encode(
+        x=alt.X("RiskFactor:N", title="Risk Factor"),
+        y=alt.Y("Proportion:Q", title="Proportion"),
+        color="DiabetesStatus:N",
+        column=alt.Column("DiabetesStatus:N", title="Diabetes Status")
+    ).properties(
+        width=200,
+        height=300,
+        title="Risk Factor Proportions: Diabetic vs Non-Diabetic"
+    )
+    st.altair_chart(chart, use_container_width=True)
