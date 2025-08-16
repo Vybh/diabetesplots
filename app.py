@@ -49,7 +49,7 @@ elif plot_choice == "Risk Factors":
                         var_name="RiskFactor", value_name="Value")
     df_melted = df_melted[df_melted["Value"] == 1]
     proportions = df_melted.groupby(["DiabetesStatus", "RiskFactor"]).size().reset_index(name="Count")
-    proportions["Proportion"] = proportions.groupby("DiabetesStatus")["Count"].apply(lambda x: x / x.sum())
+    proportions["Proportion"] = proportions.groupby("DiabetesStatus")["Count"].transform(lambda x: x / x.sum())
     chart = alt.Chart(proportions).mark_bar().encode(
         x=alt.X("RiskFactor:N", title="Risk Factor"),
         y=alt.Y("Proportion:Q", title="Proportion"),
