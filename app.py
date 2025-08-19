@@ -9,7 +9,7 @@ df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
-plot_choice = st.sidebar.radio("Choice:", ["Diabetes Heatmap", "BMI vs Age", "BMI vs Diabetes", "Histogram"])
+plot_choice = st.sidebar.radio("Choice:", ["Diabetes Heatmap", "BMI vs Age", "BMI vs Diabetes", "Histogram", "Mental Health vs Diabetes"])
 
 if plot_choice == "Diabetes Heatmap":
     st.header("Correlation of Health Factors with Diabetes")
@@ -67,3 +67,14 @@ elif plot_choice == "Histogram":
     plt.xlabel("Age")
     plt.ylabel("BMI")
     st.pyplot(plt)
+
+elif plot_choice == "Mental Health vs Diabetes":
+    st.header("Average Mental Health Days by Diabetes Status")
+    mh_diabetes = df.groupby("Diabetes_012")["MentHlth"].mean().reset_index()
+    fig, ax = plt.subplots(figsize=(8,6))
+    ax.plot(mh_diabetes["Diabetes_012"], mh_diabetes["MentHlth"], marker="o", linestyle="--", color="purple")
+    ax.set_xticks([0,1,2])
+    ax.set_xticklabels(["No Diabetes", "Prediabetes", "Diabetes"])
+    ax.set_ylabel("Avg Mental Health Days")
+    ax.set_title("Mental Health vs Diabetes Status")
+    st.pyplot(fig)
