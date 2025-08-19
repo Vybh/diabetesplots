@@ -9,7 +9,7 @@ df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
-plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "Risk Factors"])
+plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "PhysHlth vs PhysActivity"])
 
 if plot_choice == "CorrPlot":
     st.header("Correlation Heatmap of Health Factors")
