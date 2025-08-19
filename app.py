@@ -9,7 +9,7 @@ df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
-plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "BMI vs Diabetes"])
+plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "BMI vs Diabetes", "Histogram"])
 
 if plot_choice == "CorrPlot":
     st.header("Correlation Heatmap of Health Factors")
@@ -52,3 +52,10 @@ elif plot_choice == "BMI vs Diabetes":
     ax.set_title("Distribution of BMI by Diabetes Status")
     st.pyplot(fig)
 
+elif plot_choice == "Histogram":
+    st.header("5. Cumulative Histogram of Cholesterol Levels")
+    plt.figure(figsize=(8,5))
+    plt.hist(df["HighChol"], bins=5, cumulative=True, density=True, color="purple", alpha=0.7)
+    plt.xlabel("High Cholesterol (0=No, 1=Yes)")
+    plt.ylabel("Cumulative Proportion")
+    st.pyplot(plt)
