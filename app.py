@@ -53,9 +53,10 @@ elif plot_choice == "BMI vs Diabetes":
     st.pyplot(fig)
 
 elif plot_choice == "Histogram":
-    st.header("5. Cumulative Histogram of Cholesterol Levels")
-    plt.figure(figsize=(8,5))
-    plt.hist(df["HighChol"], bins=5, cumulative=True, density=True, color="purple", alpha=0.7)
-    plt.xlabel("High Cholesterol (0=No, 1=Yes)")
-    plt.ylabel("Cumulative Proportion")
+    st.header("4. 2D Histogram (Heatmap) of BMI vs Age")
+    plt.figure(figsize=(8,6))
+    plt.hist2d(df["Age"], df["BMI"], bins=[30,30], cmap="Blues")
+    plt.colorbar(label="Frequency")
+    plt.xlabel("Age")
+    plt.ylabel("BMI")
     st.pyplot(plt)
