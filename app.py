@@ -9,15 +9,22 @@ df = pd.read_csv("diabetes_012_health_indicators_BRFSS2015.csv")
 
 st.title("Diabetes Modeller")
 
-plot_choice = st.sidebar.radio("Choice:", ["CorrPlot", "BMI vs Age", "BMI vs Diabetes", "Histogram"])
+plot_choice = st.sidebar.radio("Choice:", ["Diabetes Heatmap", "BMI vs Age", "BMI vs Diabetes", "Histogram"])
 
-if plot_choice == "CorrPlot":
-    st.header("Correlation Heatmap of Health Factors")
-    corr = df.corr()
-    mask = np.triu(np.ones_like(corr, dtype=bool))
-    fig, ax = plt.subplots(figsize=(12,8))
-    sns.heatmap(corr, mask=mask, annot=False, cmap='coolwarm', center=0)
+if plot_choice == "Diabetes Heatmap":
+    st.header("Correlation of Health Factors with Diabetes")
+
+    numeric_df = df.select_dtypes(include=["float64", "int64"])
+    corr = numeric_df.corr()
+
+    fig, ax = plt.subplots(figsize=(10,6))
+    sns.heatmap(corr, cmap="coolwarm", center=0, annot=True, fmt=".2f", linewidths=0.5)
+    ax.set_title("Correlation Heatmap: Diabetes vs Health Factors")
     st.pyplot(fig)
+
+    st.subheader("Feature Correlations with Diabetes_012")
+    diabetes_corr = corr["Diabetes_012"].sort_values(ascending=False)
+    st.write(diabetes_corr)
 
 elif plot_choice == "BMI vs Age":
     st.header("BMI vs Age Scatter Plot")
