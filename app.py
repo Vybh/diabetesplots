@@ -60,12 +60,11 @@ elif plot_choice == "BMI vs Diabetes":
     st.pyplot(fig)
 
 elif plot_choice == "Histogram":
-    st.header("4. 2D Histogram (Heatmap) of BMI vs Age")
-    plt.figure(figsize=(8,6))
-    plt.hist2d(df["Age"], df["BMI"], bins=[30,30], cmap="Blues")
-    plt.colorbar(label="Frequency")
-    plt.xlabel("Age")
-    plt.ylabel("BMI")
+    st.header("6. Normalized Histogram of Alcohol Consumption by Education Level")
+    plt.figure(figsize=(8,5))
+    sns.histplot(data=df, x="HvyAlcoholConsump", hue="Education", stat="probability", multiple="dodge", bins=5)
+    plt.xlabel("Heavy Alcohol Consumption")
+    plt.ylabel("Proportion")
     st.pyplot(plt)
 
 elif plot_choice == "Hexbin BMI vs Age":
