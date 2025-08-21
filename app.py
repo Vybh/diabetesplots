@@ -60,11 +60,13 @@ elif plot_choice == "BMI vs Diabetes":
     st.pyplot(fig)
 
 elif plot_choice == "Histogram":
-    st.header("6. Normalized Histogram of Alcohol Consumption by Education Level")
+    st.header("2. Overlaid Histograms of Age by Smoking Status")
     plt.figure(figsize=(8,5))
-    sns.histplot(data=df, x="HvyAlcoholConsump", hue="Education", stat="probability", multiple="dodge", bins=5)
-    plt.xlabel("Heavy Alcohol Consumption")
-    plt.ylabel("Proportion")
+    sns.histplot(df[df["Smoker"]==0]["Age"], color="blue", label="Non-Smoker", bins=30, alpha=0.5)
+    sns.histplot(df[df["Smoker"]==1]["Age"], color="red", label="Smoker", bins=30, alpha=0.5)
+    plt.xlabel("Age")
+    plt.ylabel("Count")
+    plt.legend()
     st.pyplot(plt)
 
 elif plot_choice == "Hexbin BMI vs Age":
