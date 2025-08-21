@@ -49,7 +49,7 @@ elif plot_choice == "BMI vs Age":
     st.pyplot(fig)
 
 elif plot_choice == "BMI vs Diabetes":
-    st.header("BMI Distribution by Diabetes Status")
+    st.header("BMI BoxPlot by Diabetes Status")
 
     fig, ax = plt.subplots(figsize=(8,6))
     sns.boxplot(x=df["Diabetes_012"], y=df["BMI"], palette="Set2", ax=ax)
@@ -60,7 +60,7 @@ elif plot_choice == "BMI vs Diabetes":
     st.pyplot(fig)
 
 elif plot_choice == "Histogram":
-    st.header("2. Overlaid Histograms of Age by Smoking Status")
+    st.header("Smoking Status by Age with an Overlaid Histogram")
     plt.figure(figsize=(8,5))
     sns.histplot(df[df["Smoker"]==0]["Age"], color="blue", label="Non-Smoker", bins=30, alpha=0.5)
     sns.histplot(df[df["Smoker"]==1]["Age"], color="red", label="Smoker", bins=30, alpha=0.5)
@@ -70,7 +70,7 @@ elif plot_choice == "Histogram":
     st.pyplot(plt)
 
 elif plot_choice == "Hexbin BMI vs Age":
-    st.header("Hexbin Plot of BMI vs Age")
+    st.header("Hexbin Plots for Bmi vs Age")
     fig, ax = plt.subplots(figsize=(8,6))
     hb = ax.hexbin(df["Age"], df["BMI"], gridsize=30, cmap="Blues", bins="log")
     cb = fig.colorbar(hb, ax=ax)
